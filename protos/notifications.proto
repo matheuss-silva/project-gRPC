@@ -1,0 +1,22 @@
+// notifications.proto
+syntax = "proto3";
+
+package notifications;
+
+// O serviço de notificações
+service Notifications {
+  // Um método para enviar notificações
+  rpc SendNotification(NotificationRequest) returns (NotificationResponse) {}
+}
+
+// A solicitação para enviar uma notificação
+message NotificationRequest {
+  string user_id = 1;
+  string message = 2;
+}
+
+// A resposta de uma solicitação de notificação
+message NotificationResponse {
+  bool success = 1;
+  string response_message = 2;
+}

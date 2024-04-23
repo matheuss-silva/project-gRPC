@@ -1,0 +1,7 @@
+{
+    "python.analysis.extraPaths": [
+        "./generated/notifications_pb2_",
+        "./generated/notifications_pb2_",
+        "./generated/notifications_pb2_"
+    ]
+}
