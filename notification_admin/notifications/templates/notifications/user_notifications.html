@@ -1,0 +1,24 @@
+
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Central de Notificações</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <h1>Notificações</h1>
+    {% block content %}
+    <h2>Suas Notificações</h2>
+    <ul>
+        {% for notification in notifications %}
+        <div class="{% if not notification.read %}unread{% else %}read{% endif %}">
+            {{ notification.message }}
+        </div>
+        {% endfor %}
+        <a href="{% url 'user_notifications' %}">Ver Notificações</a>
+    </ul>
+    {% endblock %}
+</body>
+</html>
