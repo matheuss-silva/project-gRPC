@@ -2,6 +2,8 @@
     "python.analysis.extraPaths": [
         "./generated/notifications_pb2_",
         "./generated/notifications_pb2_",
-        "./generated/notifications_pb2_"
+        "./generated/notifications_pb2_",
+        "./notification_admin/notifications",
+        "./notification_admin"
     ]
 }

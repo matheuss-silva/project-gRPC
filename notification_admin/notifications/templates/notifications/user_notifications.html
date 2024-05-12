@@ -3,9 +3,9 @@
 <html lang="pt">
 <head>
     <meta charset="UTF-8">
-    <title>Central de Notificações</title>
+    <title>Suas Notificações</title>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <script src="{% static 'js/client.js' %}" defer></script>
 </head>
 <body>
     <h1>Notificações</h1>
@@ -20,5 +20,9 @@
         <a href="{% url 'user_notifications' %}">Ver Notificações</a>
     </ul>
     {% endblock %}
+
+
 </body>
 </html>
+
+
