@@ -2,46 +2,14 @@ syntax = "proto3";
 
 import "google/protobuf/timestamp.proto";
 
-// Define um objeto de notificação
 message Notification {
-  string id = 1;  // Considere se você precisa transmitir o ID.
-  int64 recipient_id = 2;  // Adiciona o ID do destinatário.
+  string id = 1;
+  int64 recipient_id = 2;
   string title = 3;
   string message = 4;
   bool read = 5;
-  bool sent = 6;  // Adiciona se foi enviada.
-  google.protobuf.Timestamp created_at = 7;  // Adiciona a data de criação.
-}
-
-// Solicitação para listar notificações
-message ListNotificationsRequest {
-  string user_id = 1;
-}
-
-// Resposta para listar notificações
-message ListNotificationsResponse {
-  repeated Notification notifications = 1;
-}
-
-// Solicitação para marcar notificações como lidas
-message MarkAsReadRequest {
-  string notification_id = 1;
-}
-
-// Resposta para marcar notificações como lidas
-message MarkAsReadResponse {
-  bool success = 1;
-}
-
-// O serviço de notificações
-service Notifications {
-  rpc SendNotification(Notification) returns (MarkAsReadResponse);
-  rpc ListNotifications(ListNotificationsRequest) returns (ListNotificationsResponse);
-  rpc MarkNotificationAsRead(MarkAsReadRequest) returns (MarkAsReadResponse);
-}
-
-service NotificationService {
-  rpc SubscribeToNotifications(NotificationRequest) returns (stream NotificationResponse);
+  bool sent = 6;
+  google.protobuf.Timestamp created_at = 7;
 }
 
 message NotificationRequest {
@@ -54,3 +22,25 @@ message NotificationResponse {
   bool isRead = 3;
 }
 
+message ListNotificationsRequest {
+  string user_id = 1;
+}
+
+message ListNotificationsResponse {
+  repeated Notification notifications = 1;
+}
+
+message MarkAsReadRequest {
+  string notification_id = 1;
+}
+
+message MarkAsReadResponse {
+  bool success = 1;
+}
+
+service Notifications {
+  rpc SendNotification(Notification) returns (MarkAsReadResponse);
+  rpc ListNotifications(ListNotificationsRequest) returns (ListNotificationsResponse);
+  rpc MarkNotificationAsRead(MarkAsReadRequest) returns (MarkAsReadResponse);
+  rpc SubscribeToNotifications(NotificationRequest) returns (stream NotificationResponse);
+}

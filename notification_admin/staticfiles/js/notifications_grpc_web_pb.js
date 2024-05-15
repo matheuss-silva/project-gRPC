@@ -259,65 +259,13 @@ proto.NotificationsPromiseClient.prototype.markNotificationAsRead =
 
 
 /**
- * @param {string} hostname
- * @param {?Object} credentials
- * @param {?grpc.web.ClientOptions} options
- * @constructor
- * @struct
- * @final
- */
-proto.NotificationServiceClient =
-    function(hostname, credentials, options) {
-  if (!options) options = {};
-  options.format = 'text';
-
-  /**
-   * @private @const {!grpc.web.GrpcWebClientBase} The client
-   */
-  this.client_ = new grpc.web.GrpcWebClientBase(options);
-
-  /**
-   * @private @const {string} The hostname
-   */
-  this.hostname_ = hostname.replace(/\/+$/, '');
-
-};
-
-
-/**
- * @param {string} hostname
- * @param {?Object} credentials
- * @param {?grpc.web.ClientOptions} options
- * @constructor
- * @struct
- * @final
- */
-proto.NotificationServicePromiseClient =
-    function(hostname, credentials, options) {
-  if (!options) options = {};
-  options.format = 'text';
-
-  /**
-   * @private @const {!grpc.web.GrpcWebClientBase} The client
-   */
-  this.client_ = new grpc.web.GrpcWebClientBase(options);
-
-  /**
-   * @private @const {string} The hostname
-   */
-  this.hostname_ = hostname.replace(/\/+$/, '');
-
-};
-
-
-/**
  * @const
  * @type {!grpc.web.MethodDescriptor<
  *   !proto.NotificationRequest,
  *   !proto.NotificationResponse>}
  */
-const methodDescriptor_NotificationService_SubscribeToNotifications = new grpc.web.MethodDescriptor(
-  '/NotificationService/SubscribeToNotifications',
+const methodDescriptor_Notifications_SubscribeToNotifications = new grpc.web.MethodDescriptor(
+  '/Notifications/SubscribeToNotifications',
   grpc.web.MethodType.SERVER_STREAMING,
   proto.NotificationRequest,
   proto.NotificationResponse,
@@ -339,13 +287,13 @@ const methodDescriptor_NotificationService_SubscribeToNotifications = new grpc.w
  * @return {!grpc.web.ClientReadableStream<!proto.NotificationResponse>}
  *     The XHR Node Readable Stream
  */
-proto.NotificationServiceClient.prototype.subscribeToNotifications =
+proto.NotificationsClient.prototype.subscribeToNotifications =
     function(request, metadata) {
   return this.client_.serverStreaming(this.hostname_ +
-      '/NotificationService/SubscribeToNotifications',
+      '/Notifications/SubscribeToNotifications',
       request,
       metadata || {},
-      methodDescriptor_NotificationService_SubscribeToNotifications);
+      methodDescriptor_Notifications_SubscribeToNotifications);
 };
 
 
@@ -356,13 +304,13 @@ proto.NotificationServiceClient.prototype.subscribeToNotifications =
  * @return {!grpc.web.ClientReadableStream<!proto.NotificationResponse>}
  *     The XHR Node Readable Stream
  */
-proto.NotificationServicePromiseClient.prototype.subscribeToNotifications =
+proto.NotificationsPromiseClient.prototype.subscribeToNotifications =
     function(request, metadata) {
   return this.client_.serverStreaming(this.hostname_ +
-      '/NotificationService/SubscribeToNotifications',
+      '/Notifications/SubscribeToNotifications',
       request,
       metadata || {},
-      methodDescriptor_NotificationService_SubscribeToNotifications);
+      methodDescriptor_Notifications_SubscribeToNotifications);
 };
 
 

@@ -2,12 +2,11 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-from generated import notifications_pb2_grpc, notifications_pb2
+from generated import notifications_pb2, notifications_pb2_grpc
 
 
 class NotificationsStub(object):
-    """O serviço de notificações
-    """
+    """Missing associated documentation comment in .proto file."""
 
     def __init__(self, channel):
         """Constructor.
@@ -16,25 +15,29 @@ class NotificationsStub(object):
             channel: A grpc.Channel.
         """
         self.SendNotification = channel.unary_unary(
-                '/notifications.Notifications/SendNotification',
+                '/Notifications/SendNotification',
                 request_serializer=notifications_pb2.Notification.SerializeToString,
                 response_deserializer=notifications_pb2.MarkAsReadResponse.FromString,
                 )
         self.ListNotifications = channel.unary_unary(
-                '/notifications.Notifications/ListNotifications',
+                '/Notifications/ListNotifications',
                 request_serializer=notifications_pb2.ListNotificationsRequest.SerializeToString,
                 response_deserializer=notifications_pb2.ListNotificationsResponse.FromString,
                 )
         self.MarkNotificationAsRead = channel.unary_unary(
-                '/notifications.Notifications/MarkNotificationAsRead',
+                '/Notifications/MarkNotificationAsRead',
                 request_serializer=notifications_pb2.MarkAsReadRequest.SerializeToString,
                 response_deserializer=notifications_pb2.MarkAsReadResponse.FromString,
+                )
+        self.SubscribeToNotifications = channel.unary_stream(
+                '/Notifications/SubscribeToNotifications',
+                request_serializer=notifications_pb2.NotificationRequest.SerializeToString,
+                response_deserializer=notifications_pb2.NotificationResponse.FromString,
                 )
 
 
 class NotificationsServicer(object):
-    """O serviço de notificações
-    """
+    """Missing associated documentation comment in .proto file."""
 
     def SendNotification(self, request, context):
         """Missing associated documentation comment in .proto file."""
@@ -49,6 +52,12 @@ class NotificationsServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def MarkNotificationAsRead(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def SubscribeToNotifications(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -72,16 +81,20 @@ def add_NotificationsServicer_to_server(servicer, server):
                     request_deserializer=notifications_pb2.MarkAsReadRequest.FromString,
                     response_serializer=notifications_pb2.MarkAsReadResponse.SerializeToString,
             ),
+            'SubscribeToNotifications': grpc.unary_stream_rpc_method_handler(
+                    servicer.SubscribeToNotifications,
+                    request_deserializer=notifications_pb2.NotificationRequest.FromString,
+                    response_serializer=notifications_pb2.NotificationResponse.SerializeToString,
+            ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'notifications.Notifications', rpc_method_handlers)
+            'Notifications', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
 
 
  # This class is part of an EXPERIMENTAL API.
 class Notifications(object):
-    """O serviço de notificações
-    """
+    """Missing associated documentation comment in .proto file."""
 
     @staticmethod
     def SendNotification(request,
@@ -94,7 +107,7 @@ class Notifications(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/notifications.Notifications/SendNotification',
+        return grpc.experimental.unary_unary(request, target, '/Notifications/SendNotification',
             notifications_pb2.Notification.SerializeToString,
             notifications_pb2.MarkAsReadResponse.FromString,
             options, channel_credentials,
@@ -111,7 +124,7 @@ class Notifications(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/notifications.Notifications/ListNotifications',
+        return grpc.experimental.unary_unary(request, target, '/Notifications/ListNotifications',
             notifications_pb2.ListNotificationsRequest.SerializeToString,
             notifications_pb2.ListNotificationsResponse.FromString,
             options, channel_credentials,
@@ -128,55 +141,11 @@ class Notifications(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/notifications.Notifications/MarkNotificationAsRead',
+        return grpc.experimental.unary_unary(request, target, '/Notifications/MarkNotificationAsRead',
             notifications_pb2.MarkAsReadRequest.SerializeToString,
             notifications_pb2.MarkAsReadResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-
-class NotificationServiceStub(object):
-    """Missing associated documentation comment in .proto file."""
-
-    def __init__(self, channel):
-        """Constructor.
-
-        Args:
-            channel: A grpc.Channel.
-        """
-        self.SubscribeToNotifications = channel.unary_stream(
-                '/notifications.NotificationService/SubscribeToNotifications',
-                request_serializer=notifications_pb2.NotificationRequest.SerializeToString,
-                response_deserializer=notifications_pb2.NotificationResponse.FromString,
-                )
-
-
-class NotificationServiceServicer(object):
-    """Missing associated documentation comment in .proto file."""
-
-    def SubscribeToNotifications(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-
-def add_NotificationServiceServicer_to_server(servicer, server):
-    rpc_method_handlers = {
-            'SubscribeToNotifications': grpc.unary_stream_rpc_method_handler(
-                    servicer.SubscribeToNotifications,
-                    request_deserializer=notifications_pb2.NotificationRequest.FromString,
-                    response_serializer=notifications_pb2.NotificationResponse.SerializeToString,
-            ),
-    }
-    generic_handler = grpc.method_handlers_generic_handler(
-            'notifications.NotificationService', rpc_method_handlers)
-    server.add_generic_rpc_handlers((generic_handler,))
-
-
- # This class is part of an EXPERIMENTAL API.
-class NotificationService(object):
-    """Missing associated documentation comment in .proto file."""
 
     @staticmethod
     def SubscribeToNotifications(request,
@@ -189,7 +158,7 @@ class NotificationService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_stream(request, target, '/notifications.NotificationService/SubscribeToNotifications',
+        return grpc.experimental.unary_stream(request, target, '/Notifications/SubscribeToNotifications',
             notifications_pb2.NotificationRequest.SerializeToString,
             notifications_pb2.NotificationResponse.FromString,
             options, channel_credentials,
