@@ -17,11 +17,11 @@
 
 
 const grpc = {};
-grpc.web = require('grpc-web');
+grpc.web = import('grpc-web');
 
 
-var google_protobuf_timestamp_pb = require('google-protobuf/google/protobuf/timestamp_pb.js')
-const proto = require('./notifications_pb.js');
+import * as google_protobuf_timestamp_pb from 'google-protobuf/google/protobuf/timestamp_pb';
+import * as proto from './notifications_pb.js';
 
 /**
  * @param {string} hostname

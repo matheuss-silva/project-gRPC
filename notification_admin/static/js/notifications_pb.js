@@ -11,9 +11,9 @@
 /* eslint-disable */
 // @ts-nocheck
 
-var jspb = require('google-protobuf');
-var goog = jspb;
-var global =
+import * as jspb from 'google-protobuf';
+const goog = jspb;
+const global =
     (typeof globalThis !== 'undefined' && globalThis) ||
     (typeof window !== 'undefined' && window) ||
     (typeof global !== 'undefined' && global) ||
@@ -21,7 +21,7 @@ var global =
     (function () { return this; }).call(null) ||
     Function('return this')();
 
-var google_protobuf_timestamp_pb = require('google-protobuf/google/protobuf/timestamp_pb.js');
+import * as google_protobuf_timestamp_pb from 'google-protobuf/google/protobuf/timestamp_pb';
 goog.object.extend(proto, google_protobuf_timestamp_pb);
 goog.exportSymbol('proto.ListNotificationsRequest', null, global);
 goog.exportSymbol('proto.ListNotificationsResponse', null, global);
