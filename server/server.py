@@ -6,11 +6,9 @@ import grpc
 import os
 import django
 
-# Configurar o ambiente do Django
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'notification_admin.notification_admin.settings')
 django.setup()
 
-# Importações devem vir após django.setup()
 from notification_admin.notifications.models import Notification
 from generated import notifications_pb2_grpc, notifications_pb2
 
@@ -51,7 +49,7 @@ class NotificationsServicer(notifications_pb2_grpc.NotificationsServicer):
             return notifications_pb2.MarkAsReadResponse(success=False)
 
     def SubscribeToNotifications(self, request, context):
-        pass  # Este método deve ser implementado conforme a lógica da sua aplicação
+        pass 
 
 def serve():
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
